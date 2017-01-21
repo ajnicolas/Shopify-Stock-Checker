@@ -1,2 +1,8 @@
 # Shopify-Stock-Checker
-Get Shopfiy sites inventory and variants
+Dependencies:
+
+-python 2.7
+-BeautifulSoup
+-Requests
+
+run script and paste link
