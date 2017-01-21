@@ -5,4 +5,4 @@ Dependencies:
 -BeautifulSoup
 -Requests
 
-run script and paste link
+run script and paste links
