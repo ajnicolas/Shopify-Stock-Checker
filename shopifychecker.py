@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 #!/python2.7
-#Follow me on twitter @pykicks
+#Created by aj nicolas
 import requests
 from bs4 import BeautifulSoup
-
+import crayons
 
 # While true to get a actual link
 def linkfriendly():
@@ -10,7 +11,7 @@ def linkfriendly():
     global r
     global soup
     while True:
-        # Get user shopify link
+        # Gets user shopify link
         try:
             url = raw_input('PASTE LINK HERE: ')
             r = requests.get(url + '.xml')
@@ -20,10 +21,10 @@ def linkfriendly():
             elif r == True:
                 print '\n' + 'Link found!'
             break
-            # Handle exceptions
+            # Handles exceptions
         except (requests.exceptions.MissingSchema, requests.exceptions.InvalidURL, requests.exceptions.ConnectionError,
-                NameError) as e:
-            print 'link no bueno '
+            requests.exceptions.InvalidSchema,NameError) as e:
+            print '{}'.format(crayons.red('link no bueno!'))
 
 
 # Grabs handle text
@@ -32,7 +33,8 @@ def grabhandle():
         for handL in soup.findAll("handle"):
             return 'Handle: ' + handL.text
     except NameError:
-        print 'Could not find text!'
+        print '{}'.format(crayons.cyan('Could not find text!'))
+
 
 
 # Sets up the link formating and grabs date link was created
@@ -68,32 +70,31 @@ def grabszstk():
         variants.append(variant)
 
     # formats the data
-    fmt = '{:<8}{:<10}{:<10}{}'
-    fmat = '{:<8}{:<10}{}'
+    fmt = '{:<5}{:<13}{:<10}{}'
+    fmat = '{:<5}{:<13}{}'
 
     # zips the for lists together
     if len(stk) > 0:
         print(fmt.format('', 'size', 'stock', 'variant'))
         for i, (sz, stk, variants) in enumerate(zip(sz, stk, variants)):
             print(fmt.format(i, sz.text, stk.text, variants.text))
-
-    elif len(stk) == 0:
-        print 'STOCK WAS NOT FOUND '
+        #if stock wasn't found
+    else:
+        print '{}'.format(crayons.red('STOCK WAS NOT FOUND'))
         print(fmat.format('', 'size','variant'))
         for i, (sz,variants) in enumerate(zip(sz,variants)):
             print(fmat.format(i, sz.text, variants.text))
 
-
 # Also bad formatting
 def formattext():
-    print '--------------------------------------' * 2
+    print '--' * 38
     print url
-    print '                                      ' * 2
+    print '  ' * 38
     try:
         print grabhandle() + ' ' + grabdate() + ' \n' + grabprice() + ' \n' + grabsku()
         print grabszstk()
     except TypeError:
-        print "Try copying everything before before the '?variant' \n or before the '?' in the link!".upper()
+        print '{}'.format(crayons.red("Try copying everything before before the '?variant' \n or before the '?' in the link!".upper()))
 
 
 # While true statment for multiple link checks!
