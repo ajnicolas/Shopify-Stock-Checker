@@ -64,16 +64,24 @@ def grabszstk():
         stk.append(stock)
 
     variants = []
-    for variant in soup.findAll("id"):
+    for variant in soup.findAll("id")[1:]:
         variants.append(variant)
 
     # formats the data
     fmt = '{:<8}{:<10}{:<10}{}'
+    fmat = '{:<8}{:<10}{}'
 
-    print(fmt.format('', 'size', 'stock', 'variant'))
     # zips the for lists together
-    for i, (sz, stk, variants) in enumerate(zip(sz, stk, variants)):
-        print(fmt.format(i, sz.text, stk.text, variants.text))
+    if len(stk) > 0:
+        print(fmt.format('', 'size', 'stock', 'variant'))
+        for i, (sz, stk, variants) in enumerate(zip(sz, stk, variants)):
+            print(fmt.format(i, sz.text, stk.text, variants.text))
+
+    elif len(stk) == 0:
+        print 'STOCK WAS NOT FOUND '
+        print(fmat.format('', 'size','variant'))
+        for i, (sz,variants) in enumerate(zip(sz,variants)):
+            print(fmat.format(i, sz.text, variants.text))
 
 
 # Also bad formatting
