@@ -1,5 +1,5 @@
 #!/python2.7
-#Follow me on twitter @_ajnicolas
+#Follow me on twitter @pykicks
 import requests
 from bs4 import BeautifulSoup
 
