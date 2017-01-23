@@ -1,8 +1,18 @@
 # Shopify-Stock-Checker
-Dependencies:
+**Checks the stock and gets variants of shopify links!**
 
--python 2.7
+**Helpful for hyped releases!**
+#Dependencies:
+
+-Python 2.7
+
 -BeautifulSoup
+
 -Requests
 
-run script and paste links
+Google how to get them
+
+#How to use:
+1. Open terminal.
+2. Run script as:```python shopifychecker.py``` in terminal.
+3. Paste shopify links.
