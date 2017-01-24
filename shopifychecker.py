@@ -13,7 +13,7 @@ def linkfriendly():
     while True:
         # Gets user shopify link
         try:
-            url = raw_input('PASTE LINK HERE: ')
+            url = raw_input(crayons.cyan('PASTE LINK HERE: '))
             r = requests.get(url + '.xml')
             soup = BeautifulSoup(r.content, 'html.parser')
             if r == False:
@@ -24,7 +24,7 @@ def linkfriendly():
             # Handles exceptions
         except (requests.exceptions.MissingSchema, requests.exceptions.InvalidURL, requests.exceptions.ConnectionError,
             requests.exceptions.InvalidSchema,NameError) as e:
-            print '{}'.format(crayons.red('link no bueno!'))
+            print crayons.red('link no bueno!')
 
 
 # Grabs handle text
@@ -80,7 +80,7 @@ def grabszstk():
             print(fmt.format(i, sz.text, stk.text, variants.text))
         #if stock wasn't found
     else:
-        print '{}'.format(crayons.red('STOCK WAS NOT FOUND'))
+        print crayons.red('STOCK WAS NOT FOUND')
         print(fmat.format('', 'size','variant'))
         for i, (sz,variants) in enumerate(zip(sz,variants)):
             print(fmat.format(i, sz.text, variants.text))
@@ -88,13 +88,14 @@ def grabszstk():
 # Also bad formatting
 def formattext():
     print '--' * 38
-    print url
+    print crayons.blue(url)
     print '  ' * 38
     try:
         print grabhandle() + ' ' + grabdate() + ' \n' + grabprice() + ' \n' + grabsku()
         print grabszstk()
+        print crayons.blue('Press ctrl + z to exit')
     except TypeError:
-        print '{}'.format(crayons.red("Try copying everything before before the '?variant' \n or before the '?' in the link!".upper()))
+        print crayons.red("Try copying everything before before the '?variant' \n or before the '?' in the link!".upper())
 
 
 # While true statment for multiple link checks!
