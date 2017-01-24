@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/python2.7
 #Created by aj nicolas
-import requests
+import requests, crayons
 from bs4 import BeautifulSoup
-import crayons
 
 # While true to get a actual link
 def linkfriendly():
@@ -35,24 +34,19 @@ def grabhandle():
     except NameError:
         print '{}'.format(crayons.cyan('Could not find text!'))
 
-
-
 # Sets up the link formating and grabs date link was created
 def grabdate():
     for created in soup.findAll("created-at"):
         return 'created: ' + created.text
-
 
 # Function names pretty self explanitory!
 def grabsku():
     for sku in soup.findAll("sku"):
         return 'sku: ' + sku.text
 
-
 def grabprice():
     for price in soup.findAll("price"):
         return 'Price: ' + price.text
-
 
 # Parses stock,sz name, and variants from shopify site
 def grabszstk():
@@ -95,7 +89,7 @@ def formattext():
         print grabszstk()
         print crayons.blue('Press ctrl + z to exit')
     except TypeError:
-        print crayons.red("Try copying everything before before the '?variant' \n or before the '?' in the link!".upper())
+        print crayons.red("Try copying everything before the '?variant' \n or before the '?' in the link!".upper())
 
 
 # While true statment for multiple link checks!
