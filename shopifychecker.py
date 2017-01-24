@@ -4,42 +4,38 @@
 import requests, crayons
 from bs4 import BeautifulSoup
 
-# While true to get a actual link
+#While true to get a actual link
 def linkfriendly():
     global url
     global r
     global soup
+
     while True:
-        # Gets user shopify link
+        #Gets user shopify link
         try:
             url = raw_input(crayons.cyan('PASTE LINK HERE: '))
             r = requests.get(url + '.xml')
             soup = BeautifulSoup(r.content, 'html.parser')
-            if r == False:
-                print 'Link not supported!'
-            elif r == True:
-                print '\n' + 'Link found!'
             break
             # Handles exceptions
         except (requests.exceptions.MissingSchema, requests.exceptions.InvalidURL, requests.exceptions.ConnectionError,
             requests.exceptions.InvalidSchema,NameError) as e:
             print crayons.red('link no bueno!')
 
-
-# Grabs handle text
+#Grabs handle text
 def grabhandle():
     try:
         for handL in soup.findAll("handle"):
             return 'Handle: ' + handL.text
     except NameError:
-        print '{}'.format(crayons.cyan('Could not find text!'))
+        print crayons.cyan('Could not find text!')
 
-# Sets up the link formating and grabs date link was created
+#Sets up the link formating and grabs date link was created
 def grabdate():
     for created in soup.findAll("created-at"):
         return 'created: ' + created.text
 
-# Function names pretty self explanitory!
+#Function names pretty self explanitory!
 def grabsku():
     for sku in soup.findAll("sku"):
         return 'sku: ' + sku.text
@@ -48,11 +44,12 @@ def grabprice():
     for price in soup.findAll("price"):
         return 'Price: ' + price.text
 
-# Parses stock,sz name, and variants from shopify site
+
+#Parses stock,sz name, and variants from shopify site
 def grabszstk():
     sz = []
     for size in soup.findAll("title")[1:]:
-        # append to list
+        # find text then append to a list
         sz.append(size)
 
     stk = []
@@ -72,29 +69,30 @@ def grabszstk():
         print(fmt.format('', 'size', 'stock', 'variant'))
         for i, (sz, stk, variants) in enumerate(zip(sz, stk, variants)):
             print(fmt.format(i, sz.text, stk.text, variants.text))
-        #if stock wasn't found
+
+    #if stock wasn't found
     else:
         print crayons.red('STOCK WAS NOT FOUND')
         print(fmat.format('', 'size','variant'))
         for i, (sz,variants) in enumerate(zip(sz,variants)):
             print(fmat.format(i, sz.text, variants.text))
 
-# Also bad formatting
+#Also bad formatting
 def formattext():
     print '--' * 38
     print crayons.blue(url)
-    print '  ' * 38
+    print crayons.yellow('Press cmd + double click link to go to link!')
     try:
-        print grabhandle() + ' ' + grabdate() + ' \n' + grabprice() + ' \n' + grabsku()
-        print grabszstk()
-        print crayons.blue('Press ctrl + z to exit')
+        print crayons.blue(grabhandle()) + ' ' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
+        print crayons.white(grabszstk())
+        print crayons.yellow('Press ctrl + z to exit')
     except TypeError:
         print crayons.red("Try copying everything before the '?variant' \n or before the '?' in the link!".upper())
 
 
-# While true statment for multiple link checks!
+#While true statment for multiple link checks!
 while True:
-    if linkfriendly() == True:
+    if linkfriendly() is True:
         print linkfriendly()
-    elif formattext() == True:
+    elif formattext() is True:
         print formattext()
