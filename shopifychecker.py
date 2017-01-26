@@ -83,7 +83,7 @@ def formattext():
     print crayons.blue(url)
     print crayons.yellow('Press cmd + double click link to go to link!')
     try:
-        print crayons.blue(grabhandle()) + ' ' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
+        print grabhandle() + ' ' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
         print crayons.white(grabszstk())
         print crayons.yellow('Press ctrl + z to exit')
     except TypeError:
