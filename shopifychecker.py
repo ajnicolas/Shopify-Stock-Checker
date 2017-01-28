@@ -14,7 +14,10 @@ def linkfriendly():
         #Gets user shopify link
         try:
             url = raw_input(crayons.cyan('PASTE LINK HERE: '))
-            r = requests.get(url + '.xml')
+            headers ={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36'
+                    '(KHTML, like Gecko) Chrome/56.0.2924.28 Safari/537.36'}
+
+            r = requests.get(url+'.xml' ,headers=headers )
             soup = BeautifulSoup(r.content, 'html.parser')
             break
             # Handles exceptions
@@ -83,7 +86,8 @@ def formattext():
     print crayons.blue(url)
     print crayons.yellow('Press cmd + double click link to go to link!')
     try:
-        print grabhandle() + ' ' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
+        print grabhandle() + '' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
+        print ' '*38
         print crayons.white(grabszstk())
         print crayons.yellow('Press ctrl + z to exit')
     except TypeError:
