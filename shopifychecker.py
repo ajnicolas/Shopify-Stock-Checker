@@ -26,22 +26,21 @@ def linkfriendly():
             print crayons.red('link no bueno!')
 
 #Grabs handle text
-def grabinfo():
-    try:
-        for handL in soup.findAll("handle"):
-            return 'Handle: ' + handL.text
+def grabhandle():
+    for handL in soup.findAll("handle"):
+        return 'Handle: ' + handL.text
 
-        for created in soup.findAll("created-at"):
-            return 'created: ' + created.text
+def grabdate():
+    for created in soup.findAll("created-at"):
+        return 'created: ' + created.text
 
-        for sku in soup.findAll("sku"):
-            return 'sku: ' + sku.text
+def grabsku():
+    for sku in soup.findAll("sku"):
+        return 'sku: ' + sku.text
 
-        for price in soup.findAll("price"):
-            return 'Price: ' + price.text
-
-    except NameError:
-        print crayons.cyan('Could not find text!')
+def grabprice():
+    for price in soup.findAll("price"):
+        return 'Price: ' + price.text
 
 #Parses stock,sz name, and variants from shopify site
 def grabszstk():
@@ -81,7 +80,7 @@ def formattext():
     print crayons.blue(url)
     print crayons.yellow('Press cmd + double click link to go to link!')
     try:
-        print grabinfo()
+        print grabhandle() + '' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
         print ' '*38
         print crayons.white(grabszstk())
         print crayons.yellow('Press ctrl + z to exit')
