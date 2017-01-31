@@ -21,32 +21,27 @@ def linkfriendly():
             soup = BeautifulSoup(r.content, 'html.parser')
             break
             # Handles exceptions
-        except (requests.exceptions.MissingSchema, requests.exceptions.InvalidURL, requests.exceptions.ConnectionError,
+        except (requests.exceptions.MissingSchema,requests.exceptions.InvalidURL,requests.exceptions.ConnectionError,
             requests.exceptions.InvalidSchema,NameError) as e:
             print crayons.red('link no bueno!')
 
 #Grabs handle text
-def grabhandle():
+def grabinfo():
     try:
         for handL in soup.findAll("handle"):
             return 'Handle: ' + handL.text
+
+        for created in soup.findAll("created-at"):
+            return 'created: ' + created.text
+
+        for sku in soup.findAll("sku"):
+            return 'sku: ' + sku.text
+
+        for price in soup.findAll("price"):
+            return 'Price: ' + price.text
+
     except NameError:
         print crayons.cyan('Could not find text!')
-
-#Sets up the link formating and grabs date link was created
-def grabdate():
-    for created in soup.findAll("created-at"):
-        return 'created: ' + created.text
-
-#Function names pretty self explanitory!
-def grabsku():
-    for sku in soup.findAll("sku"):
-        return 'sku: ' + sku.text
-
-def grabprice():
-    for price in soup.findAll("price"):
-        return 'Price: ' + price.text
-
 
 #Parses stock,sz name, and variants from shopify site
 def grabszstk():
@@ -54,7 +49,7 @@ def grabszstk():
     for size in soup.findAll("title")[1:]:
         # find text then append to a list
         sz.append(size)
-
+ 
     stk = []
     for stock in soup.findAll("inventory-quantity"):
         stk.append(stock)
@@ -86,13 +81,12 @@ def formattext():
     print crayons.blue(url)
     print crayons.yellow('Press cmd + double click link to go to link!')
     try:
-        print grabhandle() + '' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
+        print grabinfo()
         print ' '*38
         print crayons.white(grabszstk())
         print crayons.yellow('Press ctrl + z to exit')
     except TypeError:
         print crayons.red("Try copying everything before the '?variant' \n or before the '?' in the link!".upper())
-
 
 #While true statment for multiple link checks!
 while True:
