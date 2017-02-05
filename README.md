@@ -17,4 +17,4 @@ Google how to get them
 2. Run script as:```python shopifychecker.py``` in terminal.
 3. Paste shopify links.
 
-![screen shot 2017-01-25 at 6 16 17 pm](https://cloud.githubusercontent.com/assets/22848229/22315448/4720a474-e32c-11e6-907e-00fdba207b22.png)
+![screen shot 2017-02-05 at 12 47 13 pm](https://cloud.githubusercontent.com/assets/22848229/22628869/585dc3e8-eba1-11e6-9735-fe2c4713559f.png)
