@@ -56,7 +56,11 @@ def grabszstk():
     variants = []
     for variant in soup.findAll("id")[1:]:
         variants.append(variant)
-
+    #Gets the total
+    total = []
+    for stock in soup.findAll("inventory-quantity"):
+        total.append(int(stock.text))
+    
     # formats the data
     fmt = '{:<5}{:<13}{:<10}{}'
     fmat = '{:<5}{:<13}{}'
@@ -66,6 +70,7 @@ def grabszstk():
         print(fmt.format('', 'size', 'stock', 'variant'))
         for i, (sz, stk, variants) in enumerate(zip(sz, stk, variants)):
             print(fmt.format(i, sz.text, stk.text, variants.text))
+        print 'TOTAL STOCK:', sum(total)
 
     #if stock wasn't found
     else:
@@ -80,7 +85,7 @@ def formattext():
     print crayons.blue(url)
     print crayons.yellow('Press cmd + double click link to go to link!')
     try:
-        print grabhandle() + '' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
+        print grabhandle() + ' | ' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
         print ' '*38
         print crayons.white(grabszstk())
         print crayons.yellow('Press ctrl + z to exit')
