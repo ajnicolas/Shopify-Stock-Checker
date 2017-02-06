@@ -10,7 +10,11 @@
 
 -Requests
 
-Google how to get them
+-Crayons
+
+install pip
+
+install dependencies as:```pip install 'dependency here'```
 
 #How to use:
 1. Open terminal.
