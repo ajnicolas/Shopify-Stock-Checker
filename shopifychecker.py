@@ -87,7 +87,7 @@ def formattext():
     try:
         print grabhandle() + ' | ' + grabdate() + ' \n' + crayons.green(grabprice()) + ' \n' + grabsku()
         print ' '*38
-        print crayons.white(grabszstk())
+        grabszstk()
         print crayons.yellow('Press ctrl + z to exit')
     except TypeError:
         print crayons.red("Try copying everything before the '?variant' \n or before the '?' in the link!".upper())
