@@ -11,7 +11,7 @@ install pip
 #How to use:
 1. Open terminal.
 2. Navigate to folder as:```cd Shopify-Stock-Checker-master``` or drag folder onto the terminal
-3. install dependencies as:```pip install -r requirements.txt'```
+3. install dependencies as:```pip install -r requirements.txt```
 4. Run script as:```python shopifychecker.py``` in terminal.
 5. Paste shopify links.
 
